@@ -1,0 +1,6 @@
+{
+  "name": "CNC - Sistem Manajemen Kelas & Asesmen Sekolah",
+  "description": "Platform terpadu pengelolaan kelas, ujian online, quiz, asesmen, dan data akademik untuk Admin, Guru, Siswa, Kurikulum, dan Kepala Sekolah.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

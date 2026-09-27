@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cnc-teal: #069494;
+  --color-cnc-teal-dark: #046b6b;
+  --color-cnc-teal-light: #0da7a7;
+  --color-cnc-teal-50: #f0fdfd;
+  --color-cnc-teal-100: #ccfbfb;
+  --color-cnc-pink: #FF69B4;
+  --color-cnc-pink-hover: #fa4f9f;
+  --color-cnc-pink-light: #fff0f7;
+  --color-cnc-cyan: #00F0FF;
+  --color-cnc-cyan-dark: #00c9d6;
+  --color-cnc-cyan-light: #e6fdff;
+}
+
+@layer base {
+  body {
+    background-color: #F8FAFB;
+    color: #0F172A;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom Figma Palette Utilities */
+.bg-cnc-teal {
+  background-color: #069494;
+}
+.text-cnc-teal {
+  color: #069494;
+}
+.border-cnc-teal {
+  border-color: #069494;
+}
+
+.bg-cnc-pink {
+  background-color: #FF69B4;
+}
+.text-cnc-pink {
+  color: #FF69B4;
+}
+.border-cnc-pink {
+  border-color: #FF69B4;
+}
+
+.bg-cnc-cyan {
+  background-color: #00F0FF;
+}
+.text-cnc-cyan {
+  color: #00b8c4;
+}
+.border-cnc-cyan {
+  border-color: #00F0FF;
+}
+
+/* Brand Gradients */
+.bg-gradient-cnc {
+  background: linear-gradient(135deg, #069494 0%, #00F0FF 100%);
+}
+
+.bg-gradient-cnc-pink {
+  background: linear-gradient(135deg, #069494 0%, #FF69B4 100%);
+}
+
+.bg-gradient-subtle {
+  background: linear-gradient(180deg, #F0FBFB 0%, #FFFFFF 100%);
+}
