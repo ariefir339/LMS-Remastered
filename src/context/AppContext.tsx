@@ -13,6 +13,7 @@ import {
   Materi,
   TugasProjek,
   TugasSubmission,
+  MataPelajaran,
 } from '../types';
 import {
   INITIAL_USERS,
@@ -23,6 +24,7 @@ import {
   INITIAL_NILAI_REKAP,
   INITIAL_MATERI,
   INITIAL_TUGAS,
+  INITIAL_MAPEL,
 } from '../data/mockData';
 
 interface AppContextType {
@@ -103,6 +105,13 @@ interface AppContextType {
   deleteNilaiRekap: (id: string) => void;
   exportToExcel: (asesmenId: string) => void;
   exportNilaiFiltered: (filteredRows: NilaiRekap[], titleLabel?: string) => void;
+
+  // Kurikulum & Mata Pelajaran (Mapel)
+  mapelList: MataPelajaran[];
+  addMapel: (data: Omit<MataPelajaran, 'id' | 'createdAt' | 'updatedAt'>) => MataPelajaran;
+  updateMapel: (id: string, data: Partial<MataPelajaran>) => void;
+  deleteMapel: (id: string) => void;
+
   resetToInitialData: () => void;
 }
 
@@ -138,6 +147,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [asesmenList, setAsesmenList] = useState<Asesmen[]>(() => loadInitial('asesmen', INITIAL_ASESMEN));
   const [jawabanList, setJawabanList] = useState<JawabanSiswa[]>(() => loadInitial('jawaban', INITIAL_JAWABAN));
   const [nilaiRekapList, setNilaiRekapList] = useState<NilaiRekap[]>(() => loadInitial('nilaiRekap', INITIAL_NILAI_REKAP));
+  const [mapelList, setMapelList] = useState<MataPelajaran[]>(() => loadInitial('mapel', INITIAL_MAPEL));
 
   // Sync to local storage
   useEffect(() => {
@@ -167,6 +177,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     localStorage.setItem('cnc_app_nilaiRekap', JSON.stringify(nilaiRekapList));
   }, [nilaiRekapList]);
+  useEffect(() => {
+    localStorage.setItem('cnc_app_mapel', JSON.stringify(mapelList));
+  }, [mapelList]);
 
   // Auth functions
   const login = (role: UserRole, email: string, credential: string) => {
@@ -753,6 +766,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     exportNilaiFiltered(rows, `Rekap_Nilai_${asesmen?.judul || 'Asesmen'}`);
   };
 
+  // Kurikulum & Mata Pelajaran CRUD
+  const addMapel = (data: Omit<MataPelajaran, 'id' | 'createdAt' | 'updatedAt'>) => {
+    const newMapel: MataPelajaran = {
+      ...data,
+      id: `mapel-${Date.now()}`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    setMapelList((prev) => [newMapel, ...prev]);
+    return newMapel;
+  };
+
+  const updateMapel = (id: string, data: Partial<MataPelajaran>) => {
+    setMapelList((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, ...data, updatedAt: new Date().toISOString() } : m))
+    );
+  };
+
+  const deleteMapel = (id: string) => {
+    setMapelList((prev) => prev.filter((m) => m.id !== id));
+  };
+
   const resetToInitialData = () => {
     localStorage.removeItem('cnc_app_users');
     localStorage.removeItem('cnc_app_kelas');
@@ -762,6 +797,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.removeItem('cnc_app_asesmen');
     localStorage.removeItem('cnc_app_jawaban');
     localStorage.removeItem('cnc_app_nilaiRekap');
+    localStorage.removeItem('cnc_app_mapel');
     setUsers(INITIAL_USERS);
     setKelasList(INITIAL_KELAS);
     setPengumumanList(INITIAL_PENGUMUMAN);
@@ -770,6 +806,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setAsesmenList(INITIAL_ASESMEN);
     setJawabanList(INITIAL_JAWABAN);
     setNilaiRekapList(INITIAL_NILAI_REKAP);
+    setMapelList(INITIAL_MAPEL);
   };
 
   return (
@@ -835,6 +872,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         deleteNilaiRekap,
         exportToExcel,
         exportNilaiFiltered,
+        mapelList,
+        addMapel,
+        updateMapel,
+        deleteMapel,
         resetToInitialData,
       }}
     >

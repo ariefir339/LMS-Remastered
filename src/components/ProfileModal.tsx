@@ -21,21 +21,26 @@ export const ProfileModal: React.FC = () => {
     viewingProfileUser,
     setViewingProfileUser,
     updateCurrentUserProfile,
+    updateUser,
     kelasList,
   } = useApp();
 
   const isOwnProfile = currentUser && viewingProfileUser && currentUser.id === viewingProfileUser.id;
+  const canEditProfile =
+    isOwnProfile || currentUser?.role === 'ADMIN' || currentUser?.role === 'KURIKULUM';
 
   const [isEditing, setIsEditing] = useState(false);
   const [nama, setNama] = useState('');
   const [deskripsi, setDeskripsi] = useState('');
   const [foto, setFoto] = useState('');
+  const [mapelUtama, setMapelUtama] = useState('');
 
   useEffect(() => {
     if (viewingProfileUser) {
       setNama(viewingProfileUser.nama || '');
       setDeskripsi(viewingProfileUser.deskripsi || '');
       setFoto(viewingProfileUser.foto || '');
+      setMapelUtama(viewingProfileUser.mapelUtama || '');
       setIsEditing(false);
     }
   }, [viewingProfileUser]);
@@ -46,16 +51,19 @@ export const ProfileModal: React.FC = () => {
     e.preventDefault();
     if (!viewingProfileUser) return;
 
-    // Allowed updates: nama, foto, deskripsi
+    // Allowed updates: nama, foto, deskripsi, mapelUtama (for Guru)
     // Email is strictly locked as specified by user requirements
     const payload: Partial<User> = {
       nama: nama.trim(),
       deskripsi: deskripsi.trim(),
       foto: foto.trim(),
+      ...(viewingProfileUser.role === 'GURU' ? { mapelUtama: mapelUtama.trim() } : {}),
     };
 
     if (isOwnProfile) {
       updateCurrentUserProfile(payload);
+    } else {
+      updateUser(viewingProfileUser.id, payload);
     }
 
     setViewingProfileUser({ ...viewingProfileUser, ...payload });
@@ -72,8 +80,8 @@ export const ProfileModal: React.FC = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
       <div className="relative w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden">
-        {/* Header Cover Banner using Figma Gradient #069494 to #00F0FF */}
-        <div className="h-28 bg-gradient-to-r from-[#069494] via-[#058a8a] to-[#00F0FF] relative">
+        {/* Header Cover Banner using main #069494 */}
+        <div className="h-28 bg-gradient-to-r from-[#069494] via-[#058282] to-[#046e6e] relative">
           <div className="absolute top-3 left-4 flex items-center gap-2">
             <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/90 text-[#069494] shadow-xs">
               CNC Identity Session
@@ -95,6 +103,7 @@ export const ProfileModal: React.FC = () => {
               <img
                 src={foto || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80'}
                 alt={nama}
+                referrerPolicy="no-referrer"
                 className="w-24 h-24 rounded-2xl object-cover ring-4 ring-white shadow-xl bg-slate-100"
               />
               {isEditing && (
@@ -104,7 +113,7 @@ export const ProfileModal: React.FC = () => {
               )}
             </div>
 
-            {isOwnProfile && (
+            {canEditProfile && (
               <button
                 onClick={() => setIsEditing(!isEditing)}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
@@ -235,6 +244,21 @@ export const ProfileModal: React.FC = () => {
                   className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-[#069494] focus:bg-white"
                 />
               </div>
+
+              {viewingProfileUser.role === 'GURU' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                    Mata Pelajaran Utama yang Diampu
+                  </label>
+                  <input
+                    type="text"
+                    value={mapelUtama}
+                    onChange={(e) => setMapelUtama(e.target.value)}
+                    placeholder="Contoh: Pemrograman Web & Perangkat Bergerak"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-[#069494] focus:bg-white"
+                  />
+                </div>
+              )}
 
               {/* LOCKED EMAIL */}
               <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">

@@ -32,7 +32,7 @@ export const Navbar: React.FC = () => {
             onClick={() => setCurrentView('LANDING')}
             className="flex items-center gap-2.5 group text-left focus:outline-none"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#069494] via-[#069494] to-[#00F0FF] flex items-center justify-center shadow-md shadow-[#069494]/20 group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-[#069494] flex items-center justify-center shadow-md shadow-[#069494]/20 group-hover:scale-105 transition-transform">
               <School className="w-5 h-5 text-white" />
             </div>
             <div>
@@ -59,7 +59,6 @@ export const Navbar: React.FC = () => {
             <span className="w-3 h-3 rounded-full border border-slate-300" style={{ backgroundColor: '#FF69B4' }} title="#FF69B4 (Pink)" />
             <span className="w-3 h-3 rounded-full border border-slate-300" style={{ backgroundColor: '#069494' }} title="#069494 (Teal)" />
             <span className="w-3 h-3 rounded-full border border-slate-300" style={{ backgroundColor: '#FFFFFF' }} title="#FFFFFF (White)" />
-            <span className="w-3 h-3 rounded-full border border-slate-300" style={{ backgroundColor: '#00F0FF' }} title="#00F0FF (Cyan)" />
           </div>
 
           {/* Database Architecture Docs button */}

@@ -9,6 +9,7 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 import { GuruDashboard } from './components/guru/GuruDashboard';
 import { SiswaDashboard } from './components/siswa/SiswaDashboard';
 import { KepsekDashboard } from './components/kepsek/KepsekDashboard';
+import { KurikulumDashboard } from './components/kurikulum/KurikulumDashboard';
 
 const MainContent: React.FC = () => {
   const { currentView, currentUser } = useApp();
@@ -25,9 +26,8 @@ const MainContent: React.FC = () => {
             {currentUser?.role === 'ADMIN' && <AdminDashboard />}
             {currentUser?.role === 'GURU' && <GuruDashboard />}
             {currentUser?.role === 'SISWA' && <SiswaDashboard />}
-            {(currentUser?.role === 'KEPSEK' || currentUser?.role === 'KURIKULUM') && (
-              <KepsekDashboard />
-            )}
+            {currentUser?.role === 'KEPSEK' && <KepsekDashboard />}
+            {currentUser?.role === 'KURIKULUM' && <KurikulumDashboard />}
             {!currentUser && (
               <div className="p-10 text-center bg-white border border-slate-200 shadow-sm rounded-2xl">
                 <p className="text-slate-500 font-medium">

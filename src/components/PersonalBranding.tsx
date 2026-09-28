@@ -60,10 +60,10 @@ export const PersonalBranding: React.FC = () => {
     {
       role: 'KURIKULUM',
       title: 'Tim Kurikulum',
-      desc: 'Audit standar mutu asesmen, bank soal, dan evaluasi capaian hasil belajar siswa.',
+      desc: 'Kelola standar kurikulum, mata pelajaran (mapel), kelas, guru pengampu & nilai.',
       icon: BookOpen,
-      color: 'bg-[#00F0FF] text-slate-900',
-      bgBadge: 'bg-cyan-50 text-[#00a8b4] border-cyan-200',
+      color: 'bg-[#069494] text-white',
+      bgBadge: 'bg-teal-50 text-[#069494] border-teal-200',
     },
   ];
 
@@ -77,7 +77,7 @@ export const PersonalBranding: React.FC = () => {
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-teal-200 shadow-xs text-[#069494] text-xs font-bold mb-6">
           <Sparkles className="w-3.5 h-3.5 text-[#FF69B4]" />
           <span>CNC Education Nexus • Versi Web PC LMS</span>
-          <span className="w-2 h-2 rounded-full bg-[#00F0FF]" />
+          <span className="w-2 h-2 rounded-full bg-[#069494]" />
         </div>
 
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 max-w-4xl mx-auto leading-tight">
@@ -201,8 +201,8 @@ export const PersonalBranding: React.FC = () => {
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-[#00F0FF] hover:shadow-md transition-all">
-            <div className="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-200 text-[#009da8] flex items-center justify-center mb-4">
+          <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-xs hover:border-[#069494] hover:shadow-md transition-all">
+            <div className="w-12 h-12 rounded-xl bg-teal-50 border border-teal-200 text-[#069494] flex items-center justify-center mb-4">
               <FileSpreadsheet className="w-6 h-6" />
             </div>
             <h3 className="text-base font-bold text-slate-900 mb-2">
@@ -211,7 +211,7 @@ export const PersonalBranding: React.FC = () => {
             <p className="text-xs text-slate-600 leading-relaxed mb-3">
               Kompilasi nilai otomatis menghasilkan berkas format spreadsheet (.csv dengan encoding UTF-8 BOM) per mapel, kelas, dan jurusan.
             </p>
-            <div className="text-[11px] font-mono text-[#009da8] font-semibold flex items-center gap-1">
+            <div className="text-[11px] font-mono text-[#069494] font-semibold flex items-center gap-1">
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>Siap Olah di Microsoft Excel</span>
             </div>

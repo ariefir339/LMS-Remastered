@@ -164,6 +164,23 @@ export interface Asesmen {
   updatedAt: string;
 }
 
+export type KategoriMapel = 'KEJURUAN' | 'UMUM' | 'PILIHAN' | 'MUATAN_LOKAL';
+
+export interface MataPelajaran {
+  id: string;
+  kode: string;
+  nama: string;
+  kategori: KategoriMapel;
+  kurikulum: string;
+  kkm: number;
+  jamPelajaran: number;
+  jurusanTarget: string[];
+  guruPengampuIds: string[];
+  capaianPembelajaran?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export const LIST_JURUSAN: string[] = [
   'SMP',
   'SMA',

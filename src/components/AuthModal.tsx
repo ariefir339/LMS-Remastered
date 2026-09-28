@@ -86,7 +86,7 @@ export const AuthModal: React.FC = () => {
 
         {/* Title */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#069494] via-[#069494] to-[#00F0FF] text-white shadow-md shadow-[#069494]/20 mb-3">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#069494] text-white shadow-md shadow-[#069494]/20 mb-3">
             <Shield className="w-6 h-6" />
           </div>
           <h2 className="text-xl font-extrabold text-slate-900">
@@ -237,6 +237,13 @@ export const AuthModal: React.FC = () => {
               className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold transition-colors"
             >
               Demo Kepsek
+            </button>
+            <button
+              type="button"
+              onClick={() => handleAutoFill('KURIKULUM')}
+              className="px-2.5 py-1 rounded-lg bg-teal-50 hover:bg-teal-100 text-[#069494] text-[10px] font-bold transition-colors"
+            >
+              Demo Kurikulum
             </button>
           </div>
         </div>
