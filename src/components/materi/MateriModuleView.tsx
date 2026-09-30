@@ -122,13 +122,13 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
   return (
     <div className="space-y-6">
       {/* Header & Action Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-slate-900 border border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-indigo-400" />
-            <h2 className="text-lg font-bold text-white">Materi Pembelajaran CNC</h2>
+            <BookOpen className="w-5 h-5 text-[#069494]" />
+            <h2 className="text-base font-extrabold text-slate-900">Materi Pembelajaran CNC</h2>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             {canManage
               ? 'Kelola publikasi modul bahan ajar berupa PDF digital dan tautan referensi web.'
               : 'Baca dan pelajari materi modul bahan ajar yang diberikan oleh bapak/ibu guru.'}
@@ -143,14 +143,14 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
               placeholder="Cari materi atau mapel..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 pr-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 w-full sm:w-60"
+              className="pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#069494] focus:bg-white w-full sm:w-60"
             />
           </div>
 
           {canManage && (
             <button
               onClick={handleOpenCreate}
-              className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 shadow-md shadow-indigo-600/30 whitespace-nowrap transition-all"
+              className="px-4 py-2 rounded-xl bg-[#069494] hover:bg-[#057c7c] text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-[#069494]/20 whitespace-nowrap transition-all"
             >
               <Plus className="w-4 h-4" />
               <span>Upload Materi</span>
@@ -162,7 +162,7 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
       {/* Grid of Materials */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredMateri.length === 0 ? (
-          <div className="col-span-full p-12 text-center rounded-2xl bg-slate-900 border border-slate-800 text-slate-400 text-xs">
+          <div className="col-span-full p-12 text-center rounded-2xl bg-white border border-slate-200 text-slate-500 text-xs">
             Belum ada materi pembelajaran yang diunggah.
           </div>
         ) : (
@@ -172,18 +172,18 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
             return (
               <div
                 key={m.id}
-                className="p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between shadow-lg"
+                className="p-5 rounded-3xl bg-white border border-slate-200 hover:border-[#069494] hover:shadow-md transition-all flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span
-                      className={`text-[10px] font-bold px-2 py-0.5 rounded flex items-center gap-1 ${
+                      className={`text-[11px] font-bold flex items-center gap-1 ${
                         m.tipe === 'PDF'
-                          ? 'bg-rose-500/10 text-rose-300 border border-rose-500/20'
-                          : 'bg-cyan-500/10 text-cyan-300 border border-cyan-500/20'
+                          ? 'text-[#FF69B4]'
+                          : 'text-[#069494]'
                       }`}
                     >
-                      {m.tipe === 'PDF' ? <FileText className="w-3 h-3" /> : <LinkIcon className="w-3 h-3" />}
+                      {m.tipe === 'PDF' ? <FileText className="w-3.5 h-3.5" /> : <LinkIcon className="w-3.5 h-3.5" />}
                       <span>{m.tipe === 'PDF' ? 'Modul PDF' : 'Tautan Link'}</span>
                     </span>
                     <span className="text-[11px] font-medium text-slate-400 font-mono">
@@ -191,21 +191,21 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-bold text-white leading-snug">{m.judul}</h3>
-                  <span className="text-xs text-indigo-400 font-medium block mt-1">{m.mapel}</span>
-                  <p className="text-xs text-slate-400 mt-2 line-clamp-3">
+                  <h3 className="text-sm font-extrabold text-slate-900 leading-snug">{m.judul}</h3>
+                  <span className="text-xs text-[#069494] font-bold block mt-1">{m.mapel}</span>
+                  <p className="text-xs text-slate-500 mt-2 line-clamp-3">
                     {m.deskripsi || 'Tidak ada deskripsi tambahan.'}
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-slate-800 space-y-2">
+                <div className="mt-4 pt-3 border-t border-slate-100 space-y-2">
                   {/* Action buttons */}
                   {m.tipe === 'PDF' && (
                     <button
                       onClick={() => setSelectedMateriForPreview(m)}
-                      className="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                      className="w-full py-2 px-3 rounded-xl bg-teal-50 hover:bg-[#069494] text-[#069494] hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
                     >
-                      <FileCheck className="w-3.5 h-3.5 text-rose-400" />
+                      <FileCheck className="w-3.5 h-3.5" />
                       <span>Baca Modul ({m.fileName || 'PDF Dokumen'})</span>
                     </button>
                   )}
@@ -215,7 +215,7 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                       href={m.linkUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full py-2 px-3 rounded-xl bg-cyan-950/40 hover:bg-cyan-900/40 border border-cyan-800/40 text-cyan-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
+                      className="w-full py-2 px-3 rounded-xl bg-teal-50 hover:bg-[#069494] text-[#069494] hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>Buka Referensi Web</span>
@@ -223,17 +223,17 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                   )}
 
                   {canManage && (
-                    <div className="flex items-center justify-end gap-2 pt-1">
+                    <div className="flex items-center justify-end gap-1.5 pt-1">
                       <button
                         onClick={() => handleOpenEdit(m)}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-[#069494] hover:bg-teal-50 transition-colors"
                         title="Edit Materi"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDelete(m.id)}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-rose-900/50 text-slate-300 hover:text-rose-400 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 transition-colors"
                         title="Hapus Materi"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -249,44 +249,46 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
 
       {/* MODAL PREVIEW PDF */}
       {selectedMateriForPreview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="relative w-full max-w-4xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
-              <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-rose-400" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div className="relative w-full max-w-4xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-teal-50/50">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-xl bg-white border border-teal-200 text-[#069494]">
+                  <FileText className="w-5 h-5" />
+                </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white">{selectedMateriForPreview.judul}</h4>
-                  <p className="text-xs text-slate-400">{selectedMateriForPreview.mapel}</p>
+                  <h4 className="text-sm font-extrabold text-slate-900">{selectedMateriForPreview.judul}</h4>
+                  <p className="text-xs text-[#069494] font-semibold">{selectedMateriForPreview.mapel}</p>
                 </div>
               </div>
               <button
                 onClick={() => setSelectedMateriForPreview(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white bg-slate-800 transition-colors"
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="p-6 overflow-y-auto flex-1 space-y-4">
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300">
-                <p className="font-semibold text-white mb-1">Keterangan Modul:</p>
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
+                <p className="font-bold text-slate-900 mb-1">Keterangan Modul:</p>
                 <p>{selectedMateriForPreview.deskripsi || 'Silakan pelajari dokumen terlampir berikut.'}</p>
               </div>
 
               {/* PDF Viewer simulation / iframe */}
-              <div className="w-full h-96 rounded-xl border border-slate-800 overflow-hidden bg-slate-950 flex flex-col items-center justify-center text-center p-6 space-y-3">
-                <FileText className="w-12 h-12 text-rose-500 animate-bounce" />
-                <h5 className="text-sm font-bold text-white">
+              <div className="w-full h-96 rounded-2xl border border-slate-200 overflow-hidden bg-slate-50 flex flex-col items-center justify-center text-center p-6 space-y-3">
+                <FileText className="w-12 h-12 text-[#069494]" />
+                <h5 className="text-sm font-extrabold text-slate-900">
                   {selectedMateriForPreview.fileName || 'Modul_Pembelajaran_CNC.pdf'}
                 </h5>
-                <p className="text-xs text-slate-400 max-w-md">
+                <p className="text-xs text-slate-500 max-w-md">
                   Dokumen PDF resmi pembelajaran CNC Academy siap dibaca atau diunduh untuk pembelajaran daring.
                 </p>
                 <a
                   href={selectedMateriForPreview.fileUrl || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-2 shadow-md transition-all"
+                  className="px-4 py-2.5 rounded-xl bg-[#069494] hover:bg-[#057c7c] text-white text-xs font-bold flex items-center gap-2 shadow-md shadow-[#069494]/20 transition-all"
                 >
                   <Download className="w-4 h-4" />
                   <span>Buka / Unduh Berkas PDF Lengkap</span>
@@ -299,15 +301,15 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
 
       {/* MODAL CREATE / EDIT MATERI (GURU ONLY) */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-          <div className="relative w-full max-w-lg bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
-              <h3 className="text-base font-bold text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+          <div className="relative w-full max-w-lg bg-white border border-slate-200 rounded-3xl shadow-2xl p-6 sm:p-7">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
+              <h3 className="text-base font-extrabold text-slate-900">
                 {editingMateriId ? 'Edit Materi Pembelajaran' : 'Upload Materi Baru'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white"
+                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -315,13 +317,13 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
 
             <form onSubmit={handleSaveMateri} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Target Rombel Kelas:
                 </label>
                 <select
                   value={formKelasId}
                   onChange={(e) => setFormKelasId(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-[#069494] focus:bg-white"
                 >
                   {kelasList.map((k) => (
                     <option key={k.id} value={k.id}>
@@ -332,7 +334,7 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Mata Pelajaran:
                 </label>
                 <input
@@ -340,12 +342,12 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                   required
                   value={formMapel}
                   onChange={(e) => setFormMapel(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-[#069494] focus:bg-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Judul Materi Pembelajaran:
                 </label>
                 <input
@@ -354,12 +356,12 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                   placeholder="Contoh: Modul 02 - State Management & Context API"
                   value={formJudul}
                   onChange={(e) => setFormJudul(e.target.value)}
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#069494] focus:bg-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Deskripsi / Petunjuk Baca:
                 </label>
                 <textarea
@@ -367,23 +369,23 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                   value={formDeskripsi}
                   onChange={(e) => setFormDeskripsi(e.target.value)}
                   placeholder="Instruksi belajar atau ringkasan topik materi..."
-                  className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#069494] focus:bg-white"
                 />
               </div>
 
               {/* Format Tipe: PDF vs Link */}
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5">
                   Tipe Lampiran Materi:
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     type="button"
                     onClick={() => setFormTipe('PDF')}
-                    className={`py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 border ${
+                    className={`py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
                       formTipe === 'PDF'
-                        ? 'bg-rose-950/60 border-rose-500 text-rose-300'
-                        : 'bg-slate-950 border-slate-800 text-slate-400'
+                        ? 'bg-[#069494] border-[#069494] text-white shadow-xs'
+                        : 'bg-slate-50 border-slate-200 text-slate-600'
                     }`}
                   >
                     <FileText className="w-4 h-4" />
@@ -392,10 +394,10 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                   <button
                     type="button"
                     onClick={() => setFormTipe('LINK')}
-                    className={`py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 border ${
+                    className={`py-2.5 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border transition-all ${
                       formTipe === 'LINK'
-                        ? 'bg-cyan-950/60 border-cyan-500 text-cyan-300'
-                        : 'bg-slate-950 border-slate-800 text-slate-400'
+                        ? 'bg-[#069494] border-[#069494] text-white shadow-xs'
+                        : 'bg-slate-50 border-slate-200 text-slate-600'
                     }`}
                   >
                     <LinkIcon className="w-4 h-4" />
@@ -405,31 +407,31 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
               </div>
 
               {formTipe === 'PDF' ? (
-                <div className="space-y-2 p-3 bg-slate-950/70 border border-slate-800 rounded-xl">
+                <div className="space-y-2 p-3.5 bg-slate-50 border border-slate-200 rounded-2xl">
                   <div>
-                    <label className="block text-[11px] text-slate-400 mb-1">Nama File PDF:</label>
+                    <label className="block text-[11px] font-bold text-slate-600 mb-1">Nama File PDF:</label>
                     <input
                       type="text"
                       placeholder="Modul_01_Dasar_Web.pdf"
                       value={formFileName}
                       onChange={(e) => setFormFileName(e.target.value)}
-                      className="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white"
+                      className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-900"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] text-slate-400 mb-1">URL File PDF:</label>
+                    <label className="block text-[11px] font-bold text-slate-600 mb-1">URL File PDF:</label>
                     <input
                       type="url"
                       placeholder="https://.../materi.pdf"
                       value={formFileUrl}
                       onChange={(e) => setFormFileUrl(e.target.value)}
-                      className="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white font-mono"
+                      className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-900 font-mono"
                     />
                   </div>
                 </div>
               ) : (
-                <div className="p-3 bg-slate-950/70 border border-slate-800 rounded-xl">
-                  <label className="block text-[11px] text-slate-400 mb-1">
+                <div className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl">
+                  <label className="block text-[11px] font-bold text-slate-600 mb-1">
                     Tautan Web Referensi:
                   </label>
                   <input
@@ -437,22 +439,22 @@ export const MateriModuleView: React.FC<MateriModuleViewProps> = ({
                     placeholder="https://react.dev/reference/..."
                     value={formLinkUrl}
                     onChange={(e) => setFormLinkUrl(e.target.value)}
-                    className="w-full px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white font-mono"
+                    className="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-900 font-mono"
                   />
                 </div>
               )}
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs text-slate-400 hover:text-white"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-500 hover:text-slate-800 hover:bg-slate-100"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white flex items-center gap-1.5 shadow-md shadow-indigo-600/30"
+                  className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#069494] hover:bg-[#057c7c] text-white flex items-center gap-1.5 shadow-md shadow-[#069494]/20"
                 >
                   <Check className="w-4 h-4" />
                   <span>Simpan Materi</span>
