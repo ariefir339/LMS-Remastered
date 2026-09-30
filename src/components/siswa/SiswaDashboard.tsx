@@ -15,6 +15,7 @@ import {
 import { KelasDetailView } from '../admin/KelasDetailView';
 import { MateriModuleView } from '../materi/MateriModuleView';
 import { TugasProjekView } from '../tugas/TugasProjekView';
+import { RoleStatsSummary } from '../RoleStatsSummary';
 
 export const SiswaDashboard: React.FC = () => {
   const {
@@ -331,6 +332,13 @@ export const SiswaDashboard: React.FC = () => {
           </p>
         </div>
       </div>
+
+      {/* Ringkasan Statistik & Jadwal Ujian Hari Ini */}
+      <RoleStatsSummary
+        onSelectKelas={(id) => setSelectedKelasId(id)}
+        onSelectAsesmen={(exam) => handleStartExam(exam)}
+        onNavigateTab={(tab) => setSiswaTab(tab as any)}
+      />
 
       {/* 4 Tabs: KELAS, MATERI, TUGAS, ASESMEN */}
       <div className="flex border-b border-slate-200 gap-1 pb-1 overflow-x-auto text-xs font-bold">

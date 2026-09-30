@@ -158,6 +158,7 @@ export interface Asesmen {
   mapel: string;
   deskripsi?: string;
   durasiMenit?: number;      // Wajib untuk QUIZ, opsional untuk Ujian
+  tanggalPelaksanaan?: string; // Tanggal & jam jadwal pelaksanaan ujian
   status: StatusAsesmen;     // PROSES (draft) vs SELESAI (published)
   soalList: Soal[];
   createdAt: string;

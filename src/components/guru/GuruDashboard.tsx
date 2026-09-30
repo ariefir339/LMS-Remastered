@@ -23,6 +23,7 @@ import { AsesmenDetailView } from './AsesmenDetailView';
 import { MateriModuleView } from '../materi/MateriModuleView';
 import { TugasProjekView } from '../tugas/TugasProjekView';
 import { RekapNilaiView } from '../nilai/RekapNilaiView';
+import { RoleStatsSummary } from '../RoleStatsSummary';
 
 export const GuruDashboard: React.FC = () => {
   const {
@@ -49,6 +50,7 @@ export const GuruDashboard: React.FC = () => {
   const [tipe, setTipe] = useState<TipeAsesmen>('UJIAN_ONLINE');
   const [mapel, setMapel] = useState(currentUser?.mapelUtama || 'Pemrograman Web');
   const [durasiMenit, setDurasiMenit] = useState<number>(30);
+  const [tanggalPelaksanaan, setTanggalPelaksanaan] = useState<string>('2026-10-03T08:00');
   const [deskripsi, setDeskripsi] = useState('');
   const [sourceDraftId, setSourceDraftId] = useState<string>(''); // For "Kirim dari asesmen"
 
@@ -111,6 +113,7 @@ export const GuruDashboard: React.FC = () => {
       mapel: mapel.trim(),
       deskripsi: deskripsi.trim(),
       durasiMenit: tipe === 'QUIZ' ? durasiMenit : undefined,
+      tanggalPelaksanaan: tanggalPelaksanaan ? new Date(tanggalPelaksanaan).toISOString() : new Date().toISOString(),
       kelasId: createFromClassId || (targetKelasForExam || undefined),
       status: 'PROSES', // Default draft/proses unless finished
     });
@@ -159,6 +162,12 @@ export const GuruDashboard: React.FC = () => {
           <span>Buat Asesmen Baru</span>
         </button>
       </div>
+
+      {/* Ringkasan Statistik & Jadwal Ujian Hari Ini */}
+      <RoleStatsSummary
+        onSelectKelas={(id) => setSelectedKelasId(id)}
+        onNavigateTab={(tab) => setGuruTab(tab as any)}
+      />
 
       {/* Modern LMS Desktop PC Tab Navigation Bar */}
       <div className="flex border-b border-slate-200 gap-1 pb-1 overflow-x-auto text-xs font-bold">
@@ -612,22 +621,34 @@ export const GuruDashboard: React.FC = () => {
                       />
                     </div>
 
-                    {tipe === 'QUIZ' && (
-                      <div>
-                        <label className="block text-xs font-bold text-slate-700 mb-1">
-                          Durasi (Menit)
-                        </label>
-                        <input
-                          type="number"
-                          min="5"
-                          max="180"
-                          value={durasiMenit}
-                          onChange={(e) => setDurasiMenit(Number(e.target.value))}
-                          className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 font-mono focus:outline-none focus:border-[#069494] focus:bg-white"
-                        />
-                      </div>
-                    )}
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Jadwal Pelaksanaan (Tanggal &amp; Jam)
+                      </label>
+                      <input
+                        type="datetime-local"
+                        value={tanggalPelaksanaan}
+                        onChange={(e) => setTanggalPelaksanaan(e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 font-mono focus:outline-none focus:border-[#069494] focus:bg-white"
+                      />
+                    </div>
                   </div>
+
+                  {tipe === 'QUIZ' && (
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Durasi Quiz (Menit)
+                      </label>
+                      <input
+                        type="number"
+                        min="5"
+                        max="180"
+                        value={durasiMenit}
+                        onChange={(e) => setDurasiMenit(Number(e.target.value))}
+                        className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 font-mono focus:outline-none focus:border-[#069494] focus:bg-white"
+                      />
+                    </div>
+                  )}
 
                   {!createFromClassId && (
                     <div>

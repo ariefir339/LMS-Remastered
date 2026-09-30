@@ -22,6 +22,7 @@ import {
 import { ModalBuatKelas } from '../ModalBuatKelas';
 import { ModalBuatAkun } from '../ModalBuatAkun';
 import { KelasDetailView } from './KelasDetailView';
+import { RoleStatsSummary } from '../RoleStatsSummary';
 
 export const AdminDashboard: React.FC = () => {
   const {
@@ -147,6 +148,12 @@ export const AdminDashboard: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Ringkasan Statistik & Jadwal Ujian Hari Ini */}
+      <RoleStatsSummary
+        onSelectKelas={(id) => setSelectedKelasId(id)}
+        onNavigateTab={(tab) => setAdminTab(tab as any)}
+      />
 
       {/* Main Admin Tab Navigator */}
       <div className="flex border-b border-slate-200 gap-1 overflow-x-auto text-xs font-bold pb-1">

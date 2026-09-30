@@ -495,6 +495,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       mapel: data.mapel || (currentUser.mapelUtama || 'Umum'),
       deskripsi: data.deskripsi || '',
       durasiMenit: data.tipe === 'QUIZ' ? data.durasiMenit || 30 : data.durasiMenit,
+      tanggalPelaksanaan: data.tanggalPelaksanaan || new Date().toISOString(),
       status: data.status || 'PROSES', // Default draft
       soalList: data.soalList || [],
       createdAt: new Date().toISOString(),

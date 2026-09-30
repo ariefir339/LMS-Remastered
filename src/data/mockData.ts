@@ -337,6 +337,21 @@ export const INITIAL_TUGAS: TugasProjek[] = [
     tenggatWaktu: '2026-10-10T23:59:00.000Z',
     submissions: [],
     createdAt: '2026-09-16T11:00:00.000Z'
+  },
+  {
+    id: 'tugas-3',
+    guruId: 'u-guru-2',
+    kelasId: 'kelas-2',
+    jurusan: '10 TJKT 1',
+    mapel: 'Administrasi Infrastruktur Jaringan',
+    judul: 'Laporan Praktikum Routing OSPF & Konfigurasi Firewall MikroTik',
+    deskripsi: 'Kumpulkan dokumentasi topologi Cisco Packet Tracer / WinBox beserta analisis tabel routing dalam format PDF.',
+    tipeLampiran: 'PDF',
+    filePdfUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    fileName: 'Template_Laporan_TJKT.pdf',
+    tenggatWaktu: '2026-09-30T23:59:00.000Z',
+    submissions: [],
+    createdAt: '2026-09-25T09:00:00.000Z'
   }
 ];
 
@@ -385,6 +400,7 @@ export const INITIAL_ASESMEN: Asesmen[] = [
     judul: 'Ujian Akhir Semester: Fullstack Web Development',
     mapel: 'Pemrograman Web & Perangkat Bergerak',
     deskripsi: 'Evaluasi pemahaman arsitektur RESTful API, Database Prisma/SQL, dan React Hooks.',
+    tanggalPelaksanaan: '2026-09-29T08:00:00.000Z',
     status: 'SELESAI', // Published to class
     createdAt: '2026-09-15T08:00:00.000Z',
     updatedAt: '2026-09-18T10:00:00.000Z',
@@ -437,6 +453,7 @@ export const INITIAL_ASESMEN: Asesmen[] = [
     mapel: 'Pemrograman Berorientasi Objek',
     deskripsi: 'Quiz interaktif berdurasi 30 menit untuk mereview materi sprint mingguan.',
     durasiMenit: 30,
+    tanggalPelaksanaan: '2026-10-02T09:30:00.000Z',
     status: 'SELESAI',
     createdAt: '2026-09-19T09:00:00.000Z',
     updatedAt: '2026-09-19T09:30:00.000Z',

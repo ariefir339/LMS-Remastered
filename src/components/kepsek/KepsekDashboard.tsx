@@ -20,6 +20,7 @@ import { AsesmenDetailView } from '../guru/AsesmenDetailView';
 import { MateriModuleView } from '../materi/MateriModuleView';
 import { TugasProjekView } from '../tugas/TugasProjekView';
 import { RekapNilaiView } from '../nilai/RekapNilaiView';
+import { RoleStatsSummary } from '../RoleStatsSummary';
 
 export const KepsekDashboard: React.FC = () => {
   const {
@@ -90,25 +91,13 @@ export const KepsekDashboard: React.FC = () => {
             NIK: <span className="font-mono text-[#069494] font-bold">{currentUser?.nik || '-'}</span> • Akses pemantauan penuh terhadap seluruh kelas, materi, tugas projek, hasil asesmen, dan laporan nilai Excel.
           </p>
         </div>
-
-        {/* Summary Counters */}
-        <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-white border border-slate-200 text-center min-w-[90px] shadow-xs">
-            <span className="text-lg font-extrabold text-slate-900 block font-mono tabular-nums">{kelasList.length}</span>
-            <span className="text-[10px] text-slate-500 font-semibold">Total Kelas</span>
-          </div>
-          <div className="p-3 rounded-2xl bg-white border border-slate-200 text-center min-w-[90px] shadow-xs">
-            <span className="text-lg font-extrabold text-[#069494] block font-mono tabular-nums">{asesmenList.length}</span>
-            <span className="text-[10px] text-slate-500 font-semibold">Asesmen</span>
-          </div>
-          <div className="p-3 rounded-2xl bg-white border border-slate-200 text-center min-w-[90px] shadow-xs">
-            <span className="text-lg font-extrabold text-[#FF69B4] block font-mono tabular-nums">
-              {materiList.length + tugasList.length}
-            </span>
-            <span className="text-[10px] text-slate-500 font-semibold">Materi &amp; Tugas</span>
-          </div>
-        </div>
       </div>
+
+      {/* Ringkasan Statistik & Jadwal Ujian Hari Ini */}
+      <RoleStatsSummary
+        onSelectKelas={(id) => setSelectedKelasId(id)}
+        onNavigateTab={(tab) => setActiveTab(tab as any)}
+      />
 
       {/* Navigation Tabs */}
       <div className="flex border-b border-slate-200 gap-1 pb-1 overflow-x-auto text-xs font-bold">

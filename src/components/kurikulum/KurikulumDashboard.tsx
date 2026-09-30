@@ -25,6 +25,7 @@ import {
 import { ModalBuatKelas } from '../ModalBuatKelas';
 import { ModalBuatAkun } from '../ModalBuatAkun';
 import { KelasDetailView } from '../admin/KelasDetailView';
+import { RoleStatsSummary } from '../RoleStatsSummary';
 
 export const KurikulumDashboard: React.FC = () => {
   const {
@@ -269,6 +270,12 @@ export const KurikulumDashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* Ringkasan Statistik & Jadwal Ujian Hari Ini */}
+      <RoleStatsSummary
+        onSelectKelas={(id) => setSelectedKelasId(id)}
+        onNavigateTab={(tab) => setActiveTab(tab as any)}
+      />
+
       {/* Main Kurikulum Tab Navigator */}
       <div className="flex border-b border-slate-200 gap-1 overflow-x-auto text-xs font-bold pb-1">
         {[
@@ -303,49 +310,6 @@ export const KurikulumDashboard: React.FC = () => {
       {/* TAB 1: KURIKULUM & MATA PELAJARAN (MAPEL) */}
       {activeTab === 'MAPEL' && (
         <div className="space-y-5">
-          {/* Summary Metrics Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-xs font-semibold text-slate-500">Total Mata Pelajaran</span>
-              <p className="text-2xl font-extrabold text-slate-900 mt-1 font-mono tabular-nums">
-                {mapelList.length} Mapel
-              </p>
-              <span className="text-[11px] text-[#069494] font-semibold mt-1 block">
-                Kurikulum Merdeka Aktif
-              </span>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-xs font-semibold text-slate-500">Mapel Kejuruan / Produktif</span>
-              <p className="text-2xl font-extrabold text-[#069494] mt-1 font-mono tabular-nums">
-                {mapelList.filter((m) => m.kategori === 'KEJURUAN').length} Mapel
-              </p>
-              <span className="text-[11px] text-slate-500 mt-1 block">
-                PPLG, TJKT, DKV, Pemasaran, MPLB
-              </span>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-xs font-semibold text-slate-500">Rata-Rata Standar KKM</span>
-              <p className="text-2xl font-extrabold text-slate-900 mt-1 font-mono tabular-nums">
-                {avgKkm}
-              </p>
-              <span className="text-[11px] text-[#FF69B4] font-semibold mt-1 block">
-                Batas Ketuntasan Minimal
-              </span>
-            </div>
-
-            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <span className="text-xs font-semibold text-slate-500">Total Materi &amp; Asesmen</span>
-              <p className="text-2xl font-extrabold text-slate-900 mt-1 font-mono tabular-nums">
-                {materiList.length + asesmenList.length} Item
-              </p>
-              <span className="text-[11px] text-slate-500 mt-1 block">
-                {materiList.length} Modul Materi · {asesmenList.length} Ujian/Quiz
-              </span>
-            </div>
-          </div>
-
           {/* Filter & Search Bar for Mapel */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 p-4 rounded-2xl bg-white border border-slate-200 shadow-xs">
             <div className="relative flex-1">
